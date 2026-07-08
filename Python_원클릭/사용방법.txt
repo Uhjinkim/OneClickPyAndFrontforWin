@@ -1,0 +1,23 @@
+--주의--
+setup_python_lab.ps1
+python_lab_config.txt
+위 파일이 삭제되면 원클릭 파일 실행이 불가능합니다
+--------
+
+원클릭 파일을 실행하세요.
+
+설치를 진행하고 도중에 파이썬 실습 폴더를 선택하도록 합니다.
+폴더를 새로 만들거나 기존 폴더를 지정하면 PyCharm, Jupyter Lab에서 실행할 때 반영됩니다.
+
+정상적으로 설치가 종료되면 사용할 도구에 맞는 파일을 실행하면 됩니다
+
+
+- IDLE -> IDLE 실행.bat
+- Jupyter Lab -> 주피터랩 접속.bat
+- PyCharm -> PyCharm 바로가기(자동 생성) 실행
+
+Jetbrains Toolbox 설치 시
+PyCharm 버전을 쉽게 업데이트할 수 있습니다.
+설치하려면 Toolbox 설치 파일을 실행하세요.
+
+
