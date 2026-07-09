@@ -86,34 +86,21 @@ function Test-Internet {
 
     try {
 
-        Test-NetConnection `
-            download.microsoft.com `
-            -Port 443 `
-            -InformationLevel Quiet
+        $client = New-Object System.Net.Http.HttpClient
+        $client.Timeout = [TimeSpan]::FromSeconds(5)
+
+        $response = $client.GetAsync("https://www.microsoft.com").Result
+
+        $client.Dispose()
+
+        return $response.IsSuccessStatusCode
 
     }
-
     catch {
 
         return $false
 
     }
-
-}
-
-Write-Host ""
-Write-Host "인터넷 연결 확인..."
-
-if (!(Test-Internet)) {
-
-    Write-Log "인터넷 연결 실패" "ERROR"
-
-    Write-Host ""
-    Write-Host "인터넷 연결을 확인하세요." -ForegroundColor Red
-
-    Pause
-
-    exit
 
 }
 
@@ -197,27 +184,8 @@ function Install-WingetPackage {
         [string]$DisplayName
     )
 
-    Write-Log "$DisplayName 설치 확인"
-
-    try {
-
-        winget list --id $PackageId `
-            | Out-Null
-
-        if ($LASTEXITCODE -eq 0) {
-
-            Write-Host "$DisplayName : 이미 설치됨" `
-                -ForegroundColor Green
-
-            Write-Log "$DisplayName 이미 설치"
-
-            return
-        }
-
-    }
-    catch {}
-
     Write-Host "$DisplayName 설치 중..."
+    Write-Log "$DisplayName 설치 시작"
 
     winget install `
         --id $PackageId `
@@ -226,15 +194,11 @@ function Install-WingetPackage {
         --accept-source-agreements
 
     if ($LASTEXITCODE -ne 0) {
-
         Write-Log "$DisplayName 설치 실패" "ERROR"
-
         throw "$DisplayName 설치 실패"
-
     }
 
     Write-Log "$DisplayName 설치 완료"
-
 }
 
 #----------------------------------------------------------
@@ -261,6 +225,19 @@ else {
 #----------------------------------------------------------
 # npm
 #----------------------------------------------------------
+
+for ($i = 0; $i -lt 10; $i++) {
+
+    $env:Path =
+        [Environment]::GetEnvironmentVariable("Path","Machine") + ";" +
+        [Environment]::GetEnvironmentVariable("Path","User")
+
+    if (Test-Command "node" -and Test-Command "npm") {
+        break
+    }
+
+    Start-Sleep -Seconds 1
+}
 
 if (Test-Command "npm") {
 
