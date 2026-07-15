@@ -65,22 +65,6 @@ if not defined FOUND (
 )
 
 
-
-REM ==================================
-REM 4. Check Chocolatey package
-REM ==================================
-
-if not defined FOUND (
-
-    choco list --local-only | findstr /I "jetbrainstoolbox" >nul 2>&1
-
-    if not errorlevel 1 (
-        set "FOUND=CHOCOLATEY"
-    )
-)
-
-
-
 REM ==================================
 REM Result
 REM ==================================
@@ -108,7 +92,7 @@ echo JetBrains Toolbox가 없습니다.
 echo 설치 시작...
 
 
-choco install jetbrainstoolbox -y
+winget install jetbrains-toolbox -y
 
 
 if errorlevel 1 (
