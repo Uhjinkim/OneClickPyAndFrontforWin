@@ -12,12 +12,18 @@ python_lab_config.txt
 정상적으로 설치가 종료되면 사용할 도구에 맞는 파일을 실행하면 됩니다
 
 
-- IDLE -> IDLE 바로가기(자동생성) 실행
+- IDLE -> IDLE 실행.bat
 - Jupyter Lab -> 주피터랩 접속.bat
 - PyCharm -> PyCharm 바로가기(자동 생성) 실행
+
+Jupyter Lab 파일 실행했을 때 브라우저가 안 나오거나 브라우저에 Token 입력 창이 뜬다면 
+검은 창 아래쪽에 밑줄이 있는 링크를 컨트롤 + 클릭으로 실행하면 정상 접속됩니다.
+주의: 검은 창을 닫으시면 주피터랩 연결이 종료됩니다.
+
 
 Jetbrains Toolbox 설치 시
 PyCharm 버전을 쉽게 업데이트할 수 있습니다.
 설치하려면 Toolbox 설치 파일을 실행하세요.
+
 
 
